@@ -1,0 +1,160 @@
+SSH Keys, But for the Internet: Understanding Identity on Solana
+
+Tags: 100daysofsolana solana web3 blockchain beginners
+
+If you’ve spent years building in Web2, the idea of “identity on a blockchain” can sound strange at first. Where are the usernames? The login forms? The OAuth providers?
+On Solana, identity works very differently — but there’s a good chance you already understand the core idea without realizing it.
+Think about SSH keys
+When you SSH into a server, you don’t type “who you are” every time. Instead, you prove ownership of a private key. The server trusts the corresponding public key, and that cryptographic relationship becomes your identity.
+Solana works almost exactly the same way.
+Your keypair is your identity
+In Solana, identity starts with a keypair:
+A private key that only you control
+A public key that everyone can see
+When you create a wallet, you are really generating a cryptographic identity.
+Your public key becomes your address on the network. It looks something like this:
+14grJpemFaf88c8tiVb77W7TYg2W3ir6pfkKz3YjhhZ5
+That’s not a username stored in a database. It’s a 32-byte Ed25519 public key encoded in Base58.
+
+Base58 exists for practical reasons:
+
+It removes visually confusing characters like 0, O, I, and l
+It avoids punctuation that breaks copying and URLs
+It makes addresses safer for humans to handle
+
+Under the hood, though, it’s still just a public key.
+
+The network replaces the company
+
+In Web2, identity is usually managed by a company.
+
+Your Twitter account exists because Twitter’s database says it exists.
+
+Your access depends on:
+
+Email/password records
+Session tokens
+OAuth providers
+Admin systems
+
+Ultimately, the platform decides whether your account is valid.
+
+Solana removes that middle layer.
+
+There is no central database saying “Alice owns this account.” Instead, ownership is proven cryptographically.
+
+If you can produce a valid signature using the private key, the network accepts that you are the owner.
+
+That’s it.
+
+No support ticket.
+No password reset.
+No admin override.
+
+This is one of the biggest mindset shifts for Web2 developers: identity is not granted by an application. Identity is derived from cryptographic control.
+
+Accounts on Solana are more like containers
+
+Another important difference is that Solana’s accounts are not “user profiles.”
+
+On Solana, everything lives inside accounts:
+
+Wallet balances
+Program state
+Smart contracts
+NFTs
+Governance records
+
+Accounts are the fundamental storage units of the network.
+
+Your keypair controls some of those accounts by signing transactions.
+
+If you’re coming from backend development, think of it this way:
+
+In Web2:
+
+Your app owns the database
+Users authenticate against your system
+Your backend decides permissions
+
+In Solana:
+
+The blockchain is the shared database
+Users authenticate with signatures
+Programs verify permissions cryptographically
+
+Instead of checking:
+
+if (session.user.id === post.ownerId)
+
+A Solana program checks whether the transaction was signed by the expected public key.
+
+The trust model moves from application logic to cryptographic proof.
+
+Identity becomes portable
+
+This is where things get interesting.
+
+In Web2, your identity is fragmented:
+GitHub knows one version of you
+Discord knows another
+Stripe knows another
+None of them automatically trust each other
+
+On Solana, the same identity works everywhere on the network.
+
+One wallet can:
+
+Hold tokens
+Vote in governance systems
+Trade NFTs
+Interact with DeFi protocols
+Build on-chain reputation
+Sign into apps
+
+And no application has to ask another application for permission.
+
+That portability is possible because the identity layer is shared infrastructure.
+
+Signing replaces logging in
+
+A useful mental model is this:
+
+Web2 apps ask:
+
+“Do you know the password?”
+
+Solana asks:
+
+“Can you prove ownership of this key?”
+
+That proof happens through digital signatures.
+
+When your wallet signs a transaction:
+
+The transaction data is hashed
+Your private key signs the hash
+The network verifies it using your public key
+
+The private key never leaves your wallet, but the network can still verify ownership mathematically.
+
+This is why wallets matter so much in crypto. They are not just payment apps — they are identity providers.
+
+The tradeoff: freedom and responsibility
+
+This model gives users something rare on the internet: true ownership.
+
+But it also removes safety nets.
+
+If a company controls identity, they can restore access.
+If you control identity, losing the private key usually means losing access permanently.
+
+That tradeoff is intentional.
+
+Solana’s identity model prioritizes self-custody over recoverability.
+
+For Web2 developers, this can feel uncomfortable at first because we are used to centralized account recovery systems. But it also unlocks something powerful: users no longer need permission from a platform to exist online.
+
+Their identity belongs to them.
+
+And on Solana, that identity is simply a keypair.
